@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS3 Complete Reference | index.html</title>
+  <style>
+    /* ==============================
+       1. CSS CUSTOM PROPERTIES (VARIABLES)
+       ============================== */
+    :root {
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --text: #e2e8f0;
+      --accent: #38bdf8;
+      --code-bg: #0b1120;
+      --radius: 8px;
+      --font-mono: 'Courier New', monospace;
+      --font-sans: system-ui, -apple-system, sans-serif;
+    }
+
+    /* ==============================
+       2. RESET & BASE
+       ============================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* ==============================
+       3. LAYOUT (FLEXBOX & GRID DEMO)
+       ============================== */
+    header { text-align: center; margin-bottom: 2rem; }
+    header h1 { font-size: 2rem; color: var(--accent); }
+    header p { opacity: 0.8; margin-top: 0.5rem; }
+
+    .toc { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-bottom: 2rem; }
+    .toc a {
+      color: var(--accent); text-decoration: none; padding: 0.4rem 0.8rem;
+      background: var(--surface); border-radius: var(--radius);
+      font-size: 0.9rem; transition: background 0.2s;
+    }
+    .toc a:hover { background: #334155; }
+
+    .grid-demo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    .card {
+      background: var(--surface); padding: 1rem; border-radius: var(--radius);
+      border: 1px solid #334155;
+    }
+
+    /* ==============================
+       4. TYPOGRAPHY & SPACING
+       ============================== */
+    h2 { color: var(--accent); margin: 2rem 0 1rem; border-bottom: 1px solid #334155; padding-bottom: 0.5rem; }
+    h3 { margin: 1rem 0 0.5rem; }
+    p, li { margin-bottom: 0.5rem; }
+    ul { padding-left: 1.5rem; }
+    code { background: var(--code-bg); padding: 0.2rem 0.4rem; border-radius: 4px; font-family: var(--font-mono); font-size: 0.9rem; }
+    pre { background: var(--code-bg); padding: 1rem; border-radius: var(--radius); overflow-x: auto; margin: 0.5rem 0; }
+    pre code { background: none; padding: 0; }
+
+    /* ==============================
+       5. COMPONENT EXAMPLES
+       ============================== */
+    .box-model {
+      width: 200px; padding: 1rem; border: 2px dashed var(--accent);
+      margin: 1rem 0; background: rgba(56, 189, 248, 0.1);
+    }
+    .gradient {
+      height: 80px; border-radius: var(--radius); margin: 0.5rem 0;
+      background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+    }
+    .btn {
+      display: inline-block; padding: 0.6rem 1.2rem; background: var(--accent);
+      color: var(--bg); text-decoration: none; border-radius: var(--radius);
+      font-weight: 600; transition: transform 0.2s, box-shadow 0.2s;
+      cursor: pointer; border: none;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(56,189,248,0.4); }
+
+    /* ==============================
+       6. ANIMATION & TRANSITION
+       ============================== */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    .animate-box {
+      width: 60px; height: 60px; background: var(--accent);
+      border-radius: var(--radius); animation: pulse 2s infinite;
+    }
+
+    /* ==============================
+       7. RESPONSIVE (MEDIA QUERIES)
+       ============================== */
+    @media (max-width: 600px) {
+      body { padding: 1rem; }
+      .toc { flex-direction: column; align-items: stretch; }
+      h1 { font-size: 1.5rem; }
+    }
+
+    /* ==============================
+       8. PSEUDO-ELEMENTS & SELECTORS
+       ============================== */
+    .highlight::first-line { color: var(--accent); font-weight: bold; }
+    .tooltip { position: relative; display: inline-block; border-bottom: 1px dotted; cursor: help; }
+    .tooltip::after {
+      content: attr(data-tip);
+      position: absolute; bottom: 120%; left: 50%; transform: translateX(-50%);
+      background: #334155; color: var(--text); padding: 0.4rem 0.6rem;
+      border-radius: 4px; font-size: 0.8rem; white-space: nowrap;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .tooltip:hover::after { opacity: 1; }
+
+    /* ==============================
+       9. MODERN CSS FEATURES
+       ============================== */
+    .clamp-text { font-size: clamp(1rem, 2.5vw, 2rem); }
+    .calc-box { width: calc(100% - 2rem); padding: 0.5rem; background: #334155; border-radius: 4px; }
+    .container-q { container-type: inline-size; }
+    .child { width: 100%; padding: 0.5rem; background: #475569; border-radius: 4px; }
+    @container (min-width: 300px) { .child { background: var(--accent); color: var(--bg); } }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>CSS3 Complete Reference</h1>
+    <p>Self-contained index.html • Concise • Production-Ready</p>
+  </header>
+
+  <nav class="toc">
+    <a href="#syntax">Syntax</a>
+    <a href="#selectors">Selectors</a>
+    <a href="#boxmodel">Box Model</a>
+    <a href="#typography">Typography</a>
+    <a href="#colors">Colors/Gradients</a>
+    <a href="#flexbox">Flexbox</a>
+    <a href="#grid">Grid</a>
+    <a href="#transitions">Transitions</a>
+    <a href="#animations">Animations</a>
+    <a href="#responsive">Responsive</a>
+    <a href="#modern">Modern CSS</a>
+  </nav>
+
+  <main>
+    <section id="syntax">
+      <h2>1. Syntax & Structure</h2>
+      <pre><code>selector {
+  property: value; /* Declaration */
+  property2: value; /* Multiple declarations */
+}</code></pre>
+      <p>• Always end declarations with <code>;</code> • Use <code>rem</code>/<code>em</code> for spacing, <code>px</code> only for borders • Prefer <code>class</code> over <code>id</code> for styling.</p>
+    </section>
+
+    <section id="selectors">
+      <h2>2. Selectors</h2>
+      <ul>
+        <li><code>.class</code>, <code>#id</code>, <code>element</code></li>
+        <li><code>element > child</code> (direct), <code>element descendant</code> (any depth)</li>
+        <li><code>:hover</code>, <code>:focus</code>, <code>:nth-child(n)</code>, <code>:not()</code></li>
+        <li><code>[attr="val"]</code>, <code>[attr^="prefix"]</code></li>
+        <li><code>::before</code>, <code>::after</code>, <code>::first-line</code></li>
+      </ul>
+      <div class="highlight">::first-line pseudo-element demo. Only the first line inherits this style.</div>
+      <span class="tooltip" data-tip="Hover to see tooltip">Pseudo-element tooltip</span>
+    </section>
+
+    <section id="boxmodel">
+      <h2>3. Box Model</h2>
+      <p>Content → Padding → Border → Margin. Set <code>box-sizing: border-box;</code> globally to include padding/border in width/height.</p>
+      <div class="box-model">width: 200px, padding: 1rem, border: 2px dashed</div>
+      <pre><code>* { box-sizing: border-box; }
+.box { width: 200px; padding: 16px; border: 2px solid; }</code></pre>
+    </section>
+
+    <section id="typography">
+      <h2>4. Typography</h2>
+      <pre><code>font-family: system-ui, sans-serif;
+font-size: clamp(1rem, 2vw, 1.5rem);
+line-height: 1.6;
+letter-spacing: 0.02em;
+text-align: justify;
+text-decoration: none;
+font-weight: 600;</code></pre>
+      <p class="clamp-text">Fluid typography using <code>clamp()</code>. Scales between 1rem and 2rem based on viewport.</p>
+    </section>
+
+    <section id="colors">
+      <h2>5. Colors & Gradients</h2>
+      <pre><code>color: #38bdf8;
+background: rgba(56, 189, 248, 0.2);
+background: linear-gradient(135deg, #38bdf8, #818cf8);
+background: radial-gradient(circle, #fff 0%, transparent 70%);
+mix-blend-mode: screen;</code></pre>
+      <div class="gradient"></div>
+    </section>
+
+    <section id="flexbox">
+      <h2>6. Flexbox</h2>
+      <pre><code>.container {
+  display: flex;
+  flex-direction: row | column;
+  justify-content: flex-start | center | space-between | space-around;
+  align-items: stretch | center | flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+}</code></pre>
+      <div style="display:flex; gap:1rem; margin:1rem 0; flex-wrap:wrap;">
+        <div class="card" style="flex:1 1 200px;">flex: 1 1 200px</div>
+        <div class="card" style="flex:2 1 200px;">flex: 2 1 200px</div>
+      </div>
+      <p><code>flex: grow shrink basis</code> • Use for 1D layouts, navbars, cards, centering.</p>
+    </section>
+
+    <section id="grid">
+      <h2>7. CSS Grid</h2>
+      <pre><code>.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-rows: auto 1fr auto;
+  gap: 1rem;
+  align-items: start;
+}</code></pre>
+      <div class="grid-demo">
+        <div class="card">auto-fit + minmax creates responsive columns</div>
+        <div class="card">grid-area & subgrid for complex layouts</div>
+      </div>
+      <p>Use Grid for 2D layouts (page structure, galleries, dashboards). Combine with Flexbox for components.</p>
+    </section>
+
+    <section id="transitions">
+      <h2>8. Transitions</h2>
+      <pre><code>.btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(56,189,248,0.4);
+}</pre></code>
+      <button class="btn">Hover Me</button>
+      <p>• Only transition <code>transform</code> & <code>opacity</code> for 60fps performance • Avoid <code>width</code>/<code>height</code> transitions.</p>
+    </section>
+
+    <section id="animations">
+      <h2>9. Animations</h2>
+      <pre><code>@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+.box { animation: pulse 2s infinite ease-in-out; }</pre></code>
+      <div class="animate-box"></div>
+      <p><code>animation: name duration timing-function delay iteration-count direction fill-mode;</code></p>
+    </section>
+
+    <section id="responsive">
+      <h2>10. Responsive Design</h2>
+      <pre><code>@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .main { width: 100%; }
+}</code></pre>
+      <p>• Mobile-first: <code>@media (min-width: ...)</code> • Use <code>vh</code>/<code>vw</code>, <code>rem</code>, <code>clamp()</code> • Test with DevTools responsive mode.</p>
+    </section>
+
+    <section id="modern">
+      <h2>11. Modern CSS Features</h2>
+      <ul>
+        <li><code>:where()</code>, <code>:has()</code>, <code>:is()</code> for clean specificity</li>
+        <li><code>container queries</code> for component-level responsiveness</li>
+        <li><code>aspect-ratio: 16 / 9;</code> • <code>object-fit: cover;</code> • <code>gap</code> in flex/grid</li>
+        <li><code>scroll-snap</code>, <code>scrollbar-color</code>, <code>backdrop-filter</code></li>
+      </ul>
+      <div class="container-q" style="width: 200px; margin: 1rem 0;">
+        <div class="child">Container Query: < 300px = gray, ≥300px = accent</div>
+      </div>
+      <div class="calc-box">width: calc(100% - 2rem)</div>
+    </section>
+  </main>
+
+  <footer style="margin-top: 3rem; text-align: center; opacity: 0.6; font-size: 0.85rem;">
+    <p>CSS3 Reference • Built for Obaidul • Intermediate Year • Full Stack Path</p>
+  </footer>
+</body>
+</html>
